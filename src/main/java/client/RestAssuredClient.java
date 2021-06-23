@@ -3,10 +3,11 @@ package client;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import util.CurLogger;
 import java.util.HashMap;
 import static io.restassured.RestAssured.given;
 
-public class RestAssuredClient {
+public class RestAssuredClient implements CurLogger {
 
     protected String baseUrl ;
 
@@ -17,10 +18,9 @@ public class RestAssuredClient {
     public ValidatableResponse get(String path){
         return
         given()
+                .config(config)
                 .baseUri(this.baseUrl)
                 .contentType(ContentType.JSON)
-                .log()
-                .all()
         .when()
                 .get(path)
         .then()
@@ -31,10 +31,9 @@ public class RestAssuredClient {
     public ValidatableResponse post(String path , HashMap object){
         return
         given()
+                .config(config)
                 .contentType(ContentType.JSON)
                 .body(object)
-                .log()
-                .all()
         .when()
                 .post(baseUrl.concat(path))
         .then()
@@ -45,10 +44,9 @@ public class RestAssuredClient {
     public ValidatableResponse getWithParam(String path , String paramName , String value){
         return
         given()
+                .config(config)
                 .baseUri(baseUrl)
                 .contentType(ContentType.JSON)
-                .log()
-                .all()
         .when()
                 .param(paramName , value)
                 .get(path)
