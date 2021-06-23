@@ -42,6 +42,21 @@ public class RestAssuredClient {
                 .all();
     }
 
+    public ValidatableResponse getWithParam(String path , String paramName , String value){
+        return
+        given()
+                .baseUri(baseUrl)
+                .contentType(ContentType.JSON)
+                .log()
+                .all()
+        .when()
+                .param(paramName , value)
+                .get(path)
+        .then()
+                .log()
+                .all();
+    }
+
     public Response put(){
         return null ;
     }

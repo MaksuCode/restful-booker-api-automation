@@ -11,6 +11,17 @@ public class RestfulBookerService extends RestAssuredClient {
         super("https://restful-booker.herokuapp.com");
     }
 
+    public ValidatableResponse ping() {
+        return get("/ping");
+    }
+
+    public ValidatableResponse auth(String username , String password){
+        HashMap<String , String> payload = new HashMap<String , String >();
+        payload.put("username" , username);
+        payload.put("password" , password) ;
+        return post("/auth" , payload);
+    }
+
     public ValidatableResponse getBookingIds(){
         return get("/booking");
     }
@@ -19,15 +30,16 @@ public class RestfulBookerService extends RestAssuredClient {
         return get("/booking/".concat(id));
     }
 
+    public ValidatableResponse getBookingByParam(String paramName , String value){
+        return getWithParam("/booking" , paramName , value);
+    }
+
     public ValidatableResponse createNewBooking(String firstname , String lastname){
-        // TODO: 20.06.2021 FIX request body structure
         HashMap<String , String> payload = new HashMap<String , String >();
         payload.put("firstname" , firstname);
         payload.put("lastname" , lastname);
         return post("/booking" , payload);
     }
-
-
 
 
 }
