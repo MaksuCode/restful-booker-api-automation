@@ -9,6 +9,6 @@ public interface CurLogger {
     Options options = Options.builder()
             .printMultiliner()
             .build();
-    RestAssuredConfig config = CurlLoggingRestAssuredConfigFactory.createConfig();
+    RestAssuredConfig config = CurlLoggingRestAssuredConfigFactory.createConfig(options);
 
 }
