@@ -3,14 +3,12 @@ package client;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
-<<<<<<< Updated upstream
-=======
 import logger.CurLogger;
->>>>>>> Stashed changes
+
 import java.util.HashMap;
 import static io.restassured.RestAssured.given;
 
-public class RestAssuredClient {
+public class RestAssuredClient implements CurLogger {
 
     protected String baseUrl ;
 
