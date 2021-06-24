@@ -1,22 +1,50 @@
 import io.restassured.response.ValidatableResponse;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import static org.junit.jupiter.api.Assertions.* ;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Test_GetBookingIds extends BaseTest{
 
+
     @Test
-    public void getBookingIds_happy_path(){
+    void getBookingIds_happy_path(){
         ValidatableResponse response = restfulBookerService.getBookingIds();
         response.assertThat().statusCode(200);
-        assertTrue(response.extract().asPrettyString().length() > 1); // TODO: 24.06.2021 Create a better assertion here.
+        assertTrue(response.extract().jsonPath().getString("bookingid").length() > 0);
     }
 
     @Test
-    public void getBooking_with_firstName_happy_path(){
+    void getBooking_with_firstName_happy_path(){
         ValidatableResponse response = restfulBookerService.getBookingByParam("firstname" , "Eric");
         response.assertThat().statusCode(200);
-        assertTrue(response.extract().asPrettyString().length() > 1); // TODO: 24.06.2021 Create a better assertion here.
+        assertTrue(response.extract().jsonPath().getString("bookingid").length() > 0);
     }
+
+    @Test
+    void getBookingIds_with_lastname_happy_path(){
+        ValidatableResponse response = restfulBookerService.getBookingByParam("lastname" , "Brown");
+        response.assertThat().statusCode(200);
+        assertTrue(response.extract().jsonPath().getString("bookingid").length() > 0);
+    }
+
+    @Test
+    void getBookingIds_with_check_in_happy_path(){
+        ValidatableResponse response = restfulBookerService.getBookingByParam("checkin" , "2021-01-01");
+        response.assertThat().statusCode(200);
+        assertTrue(response.extract().jsonPath().getString("bookingid").length() > 0);
+    }
+
+    @Test
+    public void getBookingIds_with_check_out_happy_path(){
+        ValidatableResponse response = restfulBookerService.getBookingByParam("checkout" , "2021-01-01");
+        response.assertThat().statusCode(200);
+        assertTrue(response.extract().jsonPath().getString("bookingid").length() > 0);
+    }
+
+
+
 
 }

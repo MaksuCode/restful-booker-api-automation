@@ -3,6 +3,10 @@ package client;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+<<<<<<< Updated upstream
+=======
+import logger.CurLogger;
+>>>>>>> Stashed changes
 import java.util.HashMap;
 import static io.restassured.RestAssured.given;
 
@@ -25,7 +29,7 @@ public class RestAssuredClient {
                 .get(path)
         .then()
                 .log()
-                .all();
+                .body();
     }
 
     public ValidatableResponse post(String path , HashMap object){
@@ -39,7 +43,7 @@ public class RestAssuredClient {
                 .post(baseUrl.concat(path))
         .then()
                 .log()
-                .all();
+                .body();
     }
 
     public ValidatableResponse getWithParam(String path , String paramName , String value){
@@ -54,7 +58,7 @@ public class RestAssuredClient {
                 .get(path)
         .then()
                 .log()
-                .all();
+                .body();
     }
 
     public Response put(){
