@@ -2,6 +2,8 @@ package service;
 
 import client.RestAssuredClient;
 import io.restassured.response.ValidatableResponse;
+
+import java.net.ConnectException;
 import java.util.HashMap;
 
 public class RestfulBookerService extends RestAssuredClient {
