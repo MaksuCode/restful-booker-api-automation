@@ -1,13 +1,21 @@
 import org.junit.jupiter.api.BeforeAll;
 import service.RestfulBookerService;
+import service.ServiceConstants;
 
 public class BaseTest {
 
-    RestfulBookerService restfulBookerService = new RestfulBookerService();
+    static String ENV = System.getProperty("ENV");
+    static RestfulBookerService restfulBookerService ;
 
     @BeforeAll
-    public void create_booking_for_test(){
-        // TODO: 24.06.2021 Create a couple of bookings to use
+    public static void setUp(){
+        String URL = null;
+        if (ENV.equals("PROD")){
+            URL = ServiceConstants.PROD_URL;
+        }else if (ENV.equals("DEV")){
+            URL = ServiceConstants.DEV_URL;
+        }
+        restfulBookerService = new RestfulBookerService(URL);
     }
 
 }

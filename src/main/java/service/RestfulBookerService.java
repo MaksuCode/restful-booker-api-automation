@@ -6,9 +6,8 @@ import java.util.HashMap;
 
 public class RestfulBookerService extends RestAssuredClient {
 
-
-    public RestfulBookerService(){
-        super("https://restful-booker.herokuapp.com");
+    public RestfulBookerService(String baseUrl){
+        super(baseUrl);
     }
 
     public ValidatableResponse ping() {

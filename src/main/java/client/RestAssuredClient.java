@@ -1,16 +1,22 @@
 package client;
 
+import com.github.dzieciou.testing.curl.CurlLoggingRestAssuredConfigFactory;
+import com.github.dzieciou.testing.curl.Options;
+import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
-import logger.CurLogger;
 
 import java.util.HashMap;
 import static io.restassured.RestAssured.given;
 
-public class RestAssuredClient implements CurLogger {
+public class RestAssuredClient {
 
     protected String baseUrl ;
+    Options options = Options.builder()
+            .printMultiliner()
+            .build();
+    RestAssuredConfig config = CurlLoggingRestAssuredConfigFactory.createConfig(options);
 
     public RestAssuredClient(String baseUrl){
         this.baseUrl = baseUrl ;
