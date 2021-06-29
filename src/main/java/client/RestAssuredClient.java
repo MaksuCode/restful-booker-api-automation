@@ -6,8 +6,8 @@ import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import java.util.Map;
 
-import java.util.HashMap;
 import static io.restassured.RestAssured.given;
 
 public class RestAssuredClient {
@@ -35,7 +35,7 @@ public class RestAssuredClient {
                 .body();
     }
 
-    public ValidatableResponse post(String path , HashMap object){
+    public ValidatableResponse post(String path , Map object){
         return
         given()
                 .config(config)
