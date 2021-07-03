@@ -2,6 +2,7 @@ package service;
 
 import client.RestAssuredClient;
 import io.restassured.response.ValidatableResponse;
+import model.Booking;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,18 +36,23 @@ public class RestfulBookerService extends RestAssuredClient {
         return getWithParam("/booking" , paramName , value);
     }
 
-    public ValidatableResponse createNewBooking(String firstname , String lastname , int totalPrice , Boolean depositPaid , String checkinDate , String checkoutDate , String additionalNeeds){
+    public ValidatableResponse createNewBooking(Booking booking){
         Map<String , Object> jsonBody = new HashMap<String , Object>();
-        jsonBody.put("firstname" , firstname);
-        jsonBody.put("lastname" , lastname);
-        jsonBody.put("totalprice" , totalPrice);
-        jsonBody.put("depositpaid" , depositPaid);
+        jsonBody.put("firstname" , booking.getFirstname());
+        jsonBody.put("lastname" , booking.getLastname());
+        jsonBody.put("totalprice" , booking.getTotalPrice());
+        jsonBody.put("depositpaid" , booking.getDepositPaid());
         Map<String , String> bookingDatesMap = new HashMap<>();
-        bookingDatesMap.put("checkin" , checkinDate);
-        bookingDatesMap.put("checkout" , checkoutDate);
+        bookingDatesMap.put("checkin" , booking.getCheckInDate());
+        bookingDatesMap.put("checkout" , booking.getCheckOutDate());
         jsonBody.put("bookingdates" , bookingDatesMap);
-        jsonBody.put("additionalneeds" , additionalNeeds);
+        jsonBody.put("additionalneeds" , booking.getAdditionalNeeds());
         return post("/booking" , jsonBody);
+    }
+
+    public ValidatableResponse deleteBookingById(int bookingId , String tokenCode){
+        return delete("/booking/".concat(String.valueOf(bookingId)) , tokenCode);
+
     }
 
 

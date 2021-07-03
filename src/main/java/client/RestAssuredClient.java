@@ -62,12 +62,22 @@ public class RestAssuredClient {
                 .body();
     }
 
-    public Response put(){
+    public ValidatableResponse put(){
         return null ;
     }
 
-    public Response delete(){
-        return null ;
+    public ValidatableResponse delete(String path , String tokenCode){
+        return
+        given()
+                .config(config)
+                .baseUri(baseUrl)
+                .header("Cookie" , "token=".concat(tokenCode))
+                .contentType(ContentType.JSON)
+        .when()
+                .delete(path)
+        .then()
+                .log()
+                .body();
     }
 
 

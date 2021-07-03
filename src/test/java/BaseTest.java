@@ -1,11 +1,13 @@
+import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.BeforeAll;
 import service.RestfulBookerService;
 import service.ServiceConstants;
 
 public class BaseTest {
 
-    static String ENV = System.getProperty("ENV");
+    static String ENV = "DEV" ;//System.getProperty("ENV");
     static RestfulBookerService restfulBookerService ;
+    static String tokenCode ;
 
     @BeforeAll
     public static void setUp(){
@@ -16,6 +18,9 @@ public class BaseTest {
             URL = ServiceConstants.DEV_URL;
         }
         restfulBookerService = new RestfulBookerService(URL);
+
+        ValidatableResponse response = restfulBookerService.auth("admin" , "password123");
+        tokenCode = response.extract().jsonPath().getString("token");
     }
 
 }
