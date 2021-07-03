@@ -4,7 +4,6 @@ import com.github.dzieciou.testing.curl.CurlLoggingRestAssuredConfigFactory;
 import com.github.dzieciou.testing.curl.Options;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import java.util.Map;
 

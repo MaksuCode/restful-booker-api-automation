@@ -5,7 +5,7 @@ import service.ServiceConstants;
 
 public class BaseTest {
 
-    static String ENV = "DEV" ;//System.getProperty("ENV");
+    static String ENV = System.getProperty("ENV");
     static RestfulBookerService restfulBookerService ;
     static String tokenCode ;
 

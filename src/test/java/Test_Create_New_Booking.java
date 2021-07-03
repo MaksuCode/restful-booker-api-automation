@@ -1,6 +1,5 @@
 import io.restassured.response.ValidatableResponse;
 import model.Booking;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
