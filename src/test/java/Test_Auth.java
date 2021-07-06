@@ -12,7 +12,7 @@ public class Test_Auth extends BaseTest{
     public void auth_happy_path(){
         ValidatableResponse response = restfulBookerService.auth("admin" , "password123");
         response.assertThat().statusCode(200);
-        assertEquals(response.extract().path("token").toString().length(), 15);
+        assertEquals(15 , response.extract().path("token").toString().length());
     }
 
     @ParameterizedTest
@@ -20,7 +20,7 @@ public class Test_Auth extends BaseTest{
     public void auth_test(String username , String password , String responseMessage){
         ValidatableResponse response = restfulBookerService.auth(username , password);
         response.assertThat().statusCode(200);
-        assertEquals(responseMessage , response.extract().path("reason"));
+        assertEquals(response.extract().path("reason") , responseMessage);
     }
 
     private static Stream<Arguments> provideBadCredentials(){

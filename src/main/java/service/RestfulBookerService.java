@@ -52,7 +52,6 @@ public class RestfulBookerService extends RestAssuredClient {
 
     public ValidatableResponse deleteBookingById(int bookingId , String tokenCode){
         return delete("/booking/".concat(String.valueOf(bookingId)) , tokenCode);
-
     }
 
 

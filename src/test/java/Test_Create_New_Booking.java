@@ -36,7 +36,6 @@ public class Test_Create_New_Booking extends BaseTest{
         return Stream.of(
                 Arguments.of("İpek" , "Aksu" , 223 , true , "2018-01-01" , "2019-01-01" , "Dinner" ),
                 Arguments.of("Musti" , "Aksu" , 123 , false , "2018-01-01" , "2019-01-01" , "Breakfast")
-
         );
     }
 

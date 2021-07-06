@@ -38,14 +38,14 @@ public class Test_GetBookingIds extends BaseTest{
     void getBooking_with_firstName_happy_path(){
         ValidatableResponse response = restfulBookerService.getBookingByParam("firstname" , booking.getFirstname());
         response.assertThat().statusCode(200);
-        assertTrue(response.extract().jsonPath().getString("bookingid").length() > 0);
+        assertEquals(String.valueOf(booking.getBookingId()) , response.extract().jsonPath().getList("bookingid").get(0).toString());
     }
 
     @Test
     void getBookingIds_with_lastname_happy_path(){
         ValidatableResponse response = restfulBookerService.getBookingByParam("lastname" , booking.getLastname());
         response.assertThat().statusCode(200);
-        assertTrue(response.extract().jsonPath().getString("bookingid").length() > 0);
+        assertEquals(String.valueOf(booking.getBookingId()) , response.extract().jsonPath().getList("bookingid").get(0).toString());
     }
 
     @Test

@@ -19,6 +19,7 @@ public class BaseTest {
         }
         restfulBookerService = new RestfulBookerService(URL);
 
+
         ValidatableResponse response = restfulBookerService.auth("admin" , "password123");
         tokenCode = response.extract().jsonPath().getString("token");
     }
