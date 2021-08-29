@@ -1,7 +1,7 @@
 package service;
 
 import client.RestAssuredClient;
-import io.restassured.response.ValidatableResponse;
+import io.restassured.response.Response;
 import model.Booking;
 
 import java.util.HashMap;
@@ -13,30 +13,30 @@ public class RestfulBookerService extends RestAssuredClient {
         super(baseUrl);
     }
 
-    public ValidatableResponse ping() {
+    public Response ping() {
         return get("/ping");
     }
 
-    public ValidatableResponse auth(String username , String password){
+    public Response auth(String username , String password){
         HashMap<String , String> payload = new HashMap<String , String >();
         payload.put("username" , username);
         payload.put("password" , password) ;
         return post("/auth" , payload);
     }
 
-    public ValidatableResponse getBookingIds(){
+    public Response getBookingIds(){
         return get("/booking");
     }
 
-    public ValidatableResponse getBookingById(String id){
+    public Response getBookingById(String id){
         return get("/booking/".concat(id));
     }
 
-    public ValidatableResponse getBookingByParam(String paramName , String value){
+    public Response getBookingByParam(String paramName , String value){
         return getWithParam("/booking" , paramName , value);
     }
 
-    public ValidatableResponse createNewBooking(Booking booking){
+    public Response createNewBooking(Booking booking){
         Map<String , Object> jsonBody = new HashMap<String , Object>();
         jsonBody.put("firstname" , booking.getFirstname());
         jsonBody.put("lastname" , booking.getLastname());
@@ -50,7 +50,7 @@ public class RestfulBookerService extends RestAssuredClient {
         return post("/booking" , jsonBody);
     }
 
-    public ValidatableResponse deleteBookingById(int bookingId , String tokenCode){
+    public Response deleteBookingById(int bookingId , String tokenCode){
         return delete("/booking/".concat(String.valueOf(bookingId)) , tokenCode);
     }
 

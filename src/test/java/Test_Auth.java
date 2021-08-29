@@ -1,26 +1,30 @@
-import io.restassured.response.ValidatableResponse;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
-import static org.junit.jupiter.api.Assertions.* ;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Test_Auth extends BaseTest{
 
     @Test
     public void auth_happy_path(){
-        ValidatableResponse response = restfulBookerService.auth("admin" , "password123");
-        response.assertThat().statusCode(200);
-        assertEquals(15 , response.extract().path("token").toString().length());
+        Response response = restfulBookerService.auth("admin" , "password123");
+
+        assertEquals(response.getStatusCode() , 200);
+
+        assertEquals(15 , response.jsonPath().getString("token").length());
     }
 
     @ParameterizedTest
     @MethodSource("provideBadCredentials")
     public void auth_test(String username , String password , String responseMessage){
-        ValidatableResponse response = restfulBookerService.auth(username , password);
-        response.assertThat().statusCode(200);
-        assertEquals(response.extract().path("reason") , responseMessage);
+        Response response = restfulBookerService.auth(username , password);
+
+        assertEquals(response.getStatusCode() , 200);
+
+        assertEquals(response.jsonPath().getString("reason") , responseMessage);
     }
 
     private static Stream<Arguments> provideBadCredentials(){

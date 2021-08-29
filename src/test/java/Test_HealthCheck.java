@@ -1,14 +1,17 @@
-import io.restassured.response.ValidatableResponse;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.* ;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Test_HealthCheck extends BaseTest {
 
     @Test
     public void health_check_test(){
-        ValidatableResponse response = restfulBookerService.ping();
-        response.assertThat().statusCode(201);
-        assertEquals("Created" , response.extract().asPrettyString());
+        Response response = restfulBookerService.ping();
+
+        assertEquals(response.getStatusCode() , 201);
+
+        assertEquals("Created" , response.asString());
     }
 
 
