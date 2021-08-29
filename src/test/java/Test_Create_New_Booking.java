@@ -1,4 +1,4 @@
-import io.restassured.response.ValidatableResponse;
+import io.restassured.response.Response;
 import model.Booking;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.TestInstance;
@@ -6,8 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Test_Create_New_Booking extends BaseTest{
@@ -24,12 +23,14 @@ public class Test_Create_New_Booking extends BaseTest{
         booking.setCheckInDate(checkinDate);
         booking.setCheckOutDate(checkoutDate);
         booking.setAdditionalNeeds(additionalNeeds);
-        ValidatableResponse response = restfulBookerService.createNewBooking(booking);
-        response.assertThat().statusCode(200);
-        String bookingId = response.extract().jsonPath().getString("bookingid");
-        booking.setBookingId(Integer.parseInt(bookingId));
-        assertEquals(firstname , response.extract().jsonPath( ).getString("booking.firstname"));
-        assertEquals(lastname , response.extract().jsonPath( ).getString("booking.lastname"));
+
+        Response response = restfulBookerService.createNewBooking(booking);
+
+        assertEquals(response.getStatusCode() , 200);
+        assertEquals(firstname , response.jsonPath( ).getString("booking.firstname"));
+        assertEquals(lastname , response.jsonPath( ).getString("booking.lastname"));
+
+        booking.setBookingId(Integer.parseInt(response.jsonPath().getString("bookingid")));
     }
 
     private static Stream<Arguments> provideBookingInfo(){

@@ -1,4 +1,4 @@
-import io.restassured.response.ValidatableResponse;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import service.RestfulBookerService;
 import service.ServiceConstants;
@@ -19,9 +19,9 @@ public class BaseTest {
         }
         restfulBookerService = new RestfulBookerService(URL);
 
-
-        ValidatableResponse response = restfulBookerService.auth("admin" , "password123");
-        tokenCode = response.extract().jsonPath().getString("token");
+        Response response = restfulBookerService.auth("admin" , "password123");
+        tokenCode = response.jsonPath().getString("token");
     }
+
 
 }
