@@ -1,6 +1,7 @@
 import io.restassured.response.Response;
 import model.Booking;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -9,12 +10,14 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@DisplayName("Creating a new Booking")
 public class Test_Create_New_Booking extends BaseTest{
 
     Booking booking = new Booking();
 
     @ParameterizedTest
     @MethodSource("provideBookingInfo")
+    @DisplayName("Happy path")
     public void createNewBooking_happy_path(String firstname , String lastname , int totalPrice , Boolean depositPaid , String checkinDate , String checkoutDate , String additionalNeeds){
         booking.setFirstname(firstname);
         booking.setLastname(lastname);

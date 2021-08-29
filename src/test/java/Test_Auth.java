@@ -1,4 +1,5 @@
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -6,9 +7,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("Authentication Test")
 public class Test_Auth extends BaseTest{
 
     @Test
+    @DisplayName("Happy path")
     public void auth_happy_path(){
         Response response = restfulBookerService.auth("admin" , "password123");
 
@@ -19,6 +22,7 @@ public class Test_Auth extends BaseTest{
 
     @ParameterizedTest
     @MethodSource("provideBadCredentials")
+    @DisplayName("Authentication with invalid credentials")
     public void auth_test(String username , String password , String responseMessage){
         Response response = restfulBookerService.auth(username , password);
 
