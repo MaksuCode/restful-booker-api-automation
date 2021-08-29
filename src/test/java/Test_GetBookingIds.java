@@ -1,15 +1,12 @@
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 import model.Booking;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@DisplayName("Get all booking ids ")
 public class Test_GetBookingIds extends BaseTest{
 
     Booking booking = new Booking();
@@ -30,6 +27,7 @@ public class Test_GetBookingIds extends BaseTest{
     }
 
     @Test
+    @DisplayName("Happy path")
     void getBookingIds_happy_path(){
         Response response = restfulBookerService.getBookingIds();
 
@@ -39,6 +37,7 @@ public class Test_GetBookingIds extends BaseTest{
     }
 
     @Test
+    @DisplayName("Get booking id with firstname")
     void getBooking_with_firstName_happy_path(){
         Response response = restfulBookerService.getBookingByParam("firstname" , booking.getFirstname());
 
@@ -48,6 +47,7 @@ public class Test_GetBookingIds extends BaseTest{
     }
 
     @Test
+    @DisplayName("Get booking id with lastname")
     void getBookingIds_with_lastname_happy_path(){
         Response response = restfulBookerService.getBookingByParam("lastname" , booking.getLastname());
 
@@ -57,6 +57,7 @@ public class Test_GetBookingIds extends BaseTest{
     }
 
     @Test
+    @DisplayName("Get booking id with checkin date")
     void getBookingIds_with_check_in_date_happy_path(){
         Response response = restfulBookerService.getBookingByParam("checkin" , booking.getCheckInDate());
 
@@ -66,6 +67,7 @@ public class Test_GetBookingIds extends BaseTest{
     }
 
     @Test
+    @DisplayName("Get booking id with checkout date")
     void getBookingIds_with_check_out_date_happy_path(){
         Response response = restfulBookerService.getBookingByParam("checkout" , booking.getCheckOutDate());
 
@@ -75,6 +77,7 @@ public class Test_GetBookingIds extends BaseTest{
     }
 
     @Test
+    @DisplayName("Get booking id with invalid id")
     void  getBookingIds_with_incorrect_id(){
         Response response = restfulBookerService.getBookingById("98723");
 
